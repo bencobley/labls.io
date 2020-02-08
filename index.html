@@ -12,40 +12,83 @@
     <body>
         <main role="main" class="container">
             <h1>labls.io</h1>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="image_div">
-                            <img class="image" src="img/cat1.jpeg">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="image_div">
-                            
-                        </div>
-                    </div>
+            <div class="team-red">
+                <p>YOU ARE: RED TEAM</p>
+            </div>
+            <hr>
+            <div class="score-wrapper" style="display: none">
+                <h2><span id=red-score class="red-score">5</span> - <span id="blue-score" class="blue-score">3</span></h2>
+            </div>
+            <div class="round-wrapper " style="display: none">
+                <h2>There are <span id=number-images class="number-images">3</span> images desribed by: <span id="word" class="word">cat</span></h2>
+            </div>
+            <div class="board-wrapper">
+                <div id="image-wrapper-0" class="image-wrapper">
+                    <img id="image-0" data-id="" src="img/cat1.jpeg" class="image-red show-border">
+                </div
+                ><div id="image-wrapper-1" class="image-wrapper">
+                    <img id="image-1" data-id="" src="img/cat1.jpeg" class="">
+                </div
+                ><div id="image-wrapper-2" class="image-wrapper">
+                    <img id="image-2" data-id="" src="img/cat1.jpeg" class="">
+                </div
+                ><div id="image-wrapper-3" class="image-wrapper">
+                    <img id="image-3" data-id="" src="img/cat1.jpeg" class="image-red show-border">
+                </div
+                ><div id="image-wrapper-4" class="image-wrapper">
+                    <img id="image-4" data-id="" src="img/cat1.jpeg" class="image-blue show-border">
+                </div
+                ><div id="image-wrapper-5" class="image-wrapper">
+                    <img id="image-5" data-id="" src="img/cat1.jpeg" class="image-black show-border">
+                </div
+                ><div id="image-wrapper-6" class="image-wrapper">
+                    <img id="image-6" data-id="" src="img/cat1.jpeg" class="">
+                </div
+                ><div id="image-wrapper-7" class="image-wrapper">
+                    <img id="image-7" data-id="" src="img/cat1.jpeg" class="">
                 </div>
-        </div>
+            </div>
         </main>
-        
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <h2>Submit your word</h2>
-                </div>
-                <div class="row">
-                    <div class="col-9">
-                <input type="Input word" class="word-input" id="exampleInputEmail1">
-                    </div>
-                <div class="col-3">
-                    <button type="button" class="btn btn-primary">Submit</button>
+
+        <button onclick="move()">Click Me</button>
+        <footer class="footer" style="display: none">
+            <div class="progress-bar-wrapper">
+                <div id="progress-bar-back">
+                    <div id="progress-bar" class="bar-red"></div>
                 </div>
             </div>
         </footer>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
-</html>
+
+
+        <footer class="footer">
+          <div class="container">
+            <hr>
+            <h2>Your turn to submit word</h2>
+            <input class="word-input form-control" type="text" id="word-input" placeholder="Input word">
+            <button type="submit" class="submit btn">Submit</button>
+          </div>
+        </footer>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="frontend/js/app.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <script type="text/javascript">var i = 0;
+            function move() {
+            if (i == 0) {
+            i = 1;
+            var elem = document.getElementById("progress-bar");
+            var width = 1;
+            var id = setInterval(frame, 10);
+            function frame() {
+            if (width >= 100) {
+            clearInterval(id);
+            i = 0;
+            } else {
+            width += 0.1;
+            elem.style.width = width + "%";
+            }
+            }
+            }
+            }</script>
+        </body>
+    </html>
