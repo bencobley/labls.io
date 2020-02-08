@@ -1,0 +1,58 @@
+
+html {
+  position: relative;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+
+h1 {
+    font-family: monospace;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 20px;
+}
+
+h2 {
+    font-family: monospace;
+    text-align: center;
+    font-size: 10px;
+}
+
+
+body {
+  font-size: 14px;
+  /*padding: 5px;*/
+  min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.image {
+    width: 100%;
+}
+
+.image_div {
+    background-color: black;
+}
+
+
+.footer {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /*height: 60px;  */
+  line-height: 30px;  
+  background-color: gray;
+}
+
+.word-input {
+  width: 100%;
+  padding-left: 0px;
+}
+
+
+
+
+
