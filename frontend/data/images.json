@@ -1,0 +1,41 @@
+{
+  "data" : {
+    "type": "images",
+    "attributes": {
+        "images" : [
+          { "id" : 0,
+            "url" : "../img/dog6.jpeg",
+            "owner" : "red"
+          },
+          { "id" : 1,
+            "url" : "../img/cat1.jpeg",
+            "owner" : "red"
+          },
+          { "id" : 2,
+            "url" : "../img/cat2.jpeg",
+            "owner" : "red"
+          },
+          { "id" : 3,
+            "url" : "../img/cat3.jpeg",
+            "owner" : "blue"
+          },
+          { "id" : 4,
+            "url" : "../img/cat4.jpeg",
+            "owner" : "blue"
+          },
+          { "id" : 5,
+            "url" : "../img/cat5.jpeg",
+            "owner" : "blue"
+          },
+          { "id" : 6,
+            "url" : "../img/cat6.jpeg",
+            "owner" : "black"
+          },
+          { "id" : 7,
+            "url" : "../img/cat7.jpeg",
+            "owner" : "red"
+          }
+       ]
+    }
+  }
+}
