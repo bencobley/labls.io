@@ -1,0 +1,46 @@
+"data" : {
+  "type": "images",
+  "attributes": {
+      "state": "BOARD-WORD",
+      "playerTeamID": 0
+      "images" : [
+        { "id" : 0
+          "url" : "img/dog6.jpeg"
+          "imageType" : 0
+        },
+        { "id" : 1
+          "url" : "img/cat1.jpeg"
+          "imageType" : 0
+        },
+        { "id" : 2
+          "url" : "img/cat2.jpeg"
+          "imageType" : 0
+        },
+        { "id" : 3
+          "url" : "img/cat3.jpeg"
+          "imageType" : 1
+        },
+        { "id" : 4
+          "url" : "img/cat4.jpeg"
+          "imageType" : 1
+        },
+        { "id" : 5
+          "url" : "img/cat5.jpeg"
+          "imageType" : 1
+        },
+        { "id" : 6
+          "url" : "img/cat6.jpeg"
+          "imageType" : "black"
+        },
+        { "id" : 7
+          "url" : "img/cat7.jpeg"
+          "imageType" : 0
+        },
+
+
+
+     ]
+
+
+  }
+}
