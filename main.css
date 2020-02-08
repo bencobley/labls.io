@@ -27,10 +27,35 @@ body {
   width: 100%;
 }
 
-.board-wrapper {
-  padding: 0px;
+
+.score-wrapper {
+  padding-top: 15px;
 }
 
+.blue-score {
+  color: #0D4C80;
+  font-weight: bold;
+}
+
+.red-score {
+  color: #D62839;
+  font-weight: bold;
+}
+
+.round-wrapper {
+}
+
+.number-images {
+  font-weight: bold;
+}
+
+.word {
+  font-weight: bold;
+}
+
+.board-wrapper {
+  padding-top: 20px;
+}
 
 .image-wrapper {
   width: 50%;
@@ -38,10 +63,8 @@ body {
   padding: 1px;
 }
 
-
-.game-image {
+.image-wrapper img {
   width: 100%;
-
 }
 
 .show-border {
@@ -55,15 +78,15 @@ body {
 }
 
 
-.red-team-image {
+.image-red {
   border-color: #D62839;
 }
 
-.blue-team-image {
+.image-blue {
   border-color: #0D4C80;
 }
 
-.killer-image {
+.image-black {
   border-color: black;
   border-style: solid;
 }
@@ -74,28 +97,56 @@ body {
   color: #D62839;
 }
 
+.team-blue {
+  text-align: center;
+  color: #0D4C80;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 30px;
-  background: white;
-  /*height: 60px;  */
+  background-color: white;
 }
 
 .word-input {
   width: 70%;
   display: inline-block;
   /*line-height: 30px;  */
+  padding-bottom: 10px;
 }
 
 .submit {
   display: inline-block;
   float: right;
   background-color: black;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.progress-bar-wrapper {
+
+}
+
+#progress-bar-back {
+  width: 100%;
+  background-color: lightgray;
+}
+
+#progress-bar {
+  width: 1%;
+  height: 40px;
+  background-color: black;
 }
 
 
+/*.bar-red {
+  background-color: #D62839;
+}
 
+.bar-blue {
+  background-color: #0D4C80;
+}
+*/
 
 
