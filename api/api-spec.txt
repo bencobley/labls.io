@@ -1,0 +1,84 @@
+General update:
+  Request:
+
+    GET request to: http://url.com/api/request?type=status&gid=<GAME_ID>&uid=<USER_ID>
+
+  Response:
+
+    "data" : {  "type": "status",
+                "attributes": {
+                                  "state": "INTRO",
+                                  "playerTeamID": 0
+                                  "teams" : [
+                                                { "roundScore" : 3
+                                                  "totalScore" : 7 },
+                                                { "roundScore" : 3
+                                                  "totalScore" : 7 }
+
+                                             ]
+
+
+                              }
+              }
+
+
+Possible "state" values:
+    INTRO
+    LOADING
+    BOARD-WORD      // captains choosing word
+    BOARD-SELECT    // players selecting images
+    RESULT-ROUND
+    RESULT-GAME
+
+
+
+Submit word (by captain)
+  Request:
+
+    POST request to: http://url.com/api/submit?gid=<GAME_ID>&uid=<USER_ID&type=word&word=<WORD>
+
+  Response (if successful):
+
+    "data" : {  "type": "confirmation",
+                "success": "true"
+                "attributes": {
+                                  "state": "BOARD-SELECT",
+                              }
+              }
+
+
+
+
+
+Request for images
+  Request:
+
+    GET request to: http://url.com/api/request?type=images&gid=<GAME_ID>&uid=<USER_ID>
+
+  Response:
+
+    "data" : {  "type": "images",
+                "attributes": {
+                                  "state": "INTRO",
+                                  "playerTeamID": 0
+                                  "images" : [
+                                                { "id" : 239234
+                                                  "url" : "URL.COM"
+                                                  "imageType" : 0 },  // where value is ID of team that owns image, or "black"
+
+                                                ... repeat x 7 ...
+
+                                             ]
+
+
+                              }
+              }
+
+
+
+
+
+
+
+
+
