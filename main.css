@@ -10,7 +10,7 @@ h1 {
     font-family: monospace;
     text-align: center;
     font-size: 30px;
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 h2 {
@@ -28,12 +28,21 @@ body {
   width: 100%;
 }
 
-.image {
-    width: 100%;
+
+.image-wrapper {
+    width: 50%;
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 15px;
+
 }
 
-.image_div {
-    background-color: black;
+
+.game-image {
+    width: 100%;
+    border-style: solid;
+    border-width: 5px;
 }
 
 
