@@ -10,6 +10,10 @@ class GameEngine:
         self.blueScore = 0
         self.redLost = False
         self.blueLost = False
+        self.redWordChoice = "CHANGE THIS"
+        self.blueWordChoice = "CHANGE THIS"
+        self.redNumberChoice = 0
+        self.blueNumberChoice = 0
         self.currentPhotos = []
 
 
@@ -49,8 +53,7 @@ class GameEngine:
         self.currentState = "CAPTAIN"
         # send photos to server
         # recieve captain choices
-        redChoice = ["CHANGE THIS", 0]
-        blueChoice = ["CHANGE THIS", 0]
+
         # Send word to server
         self.currentState = "PLAYER"
         # receive player choices
@@ -85,6 +88,14 @@ class GameEngine:
     def generateImages(self):
         # method should randomly select 8 images from database
         return ["1", "2", "3", "4", "5", "6", "7", "8"]
+
+    def setRedWordChoice(self, word, number):
+        self.redWordChoice = word
+        self.redNumberChoice = number
+
+    def setBlueWordChoice(self, word, number):
+        self.blueWordChoice = word
+        self.blueNumberChoice = number
 
     def getStatus(self):
         return self.currentState
@@ -133,3 +144,4 @@ class GameEngine:
 
         ]
         return imageMap
+
