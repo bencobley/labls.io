@@ -95,7 +95,6 @@
                 <button type="submit" class="continue-round-submit btn">Continue</button>
             </div>
 
-
         </main>
 
 
@@ -108,19 +107,25 @@
             </div>
 
 
-            <div class="word-input-wrapper start-hidden board-word">
+            <div class="word-input-wrapper start-hidden board-word-CAPTAIN">
                 <hr>
                 <h2>Your turn to submit word</h2>
                 <input class="word-input form-control" type="text" id="word-input" placeholder="Input word">
                 <!-- <button type="submit" class="submit btn">Submit</button> -->
 
-                <div class="btn-group submit-group" role="group">
-                  <button type="button" class="btn submit">1</button>
-                  <button type="button" class="btn submit">2</button>
-                  <button type="button" class="btn submit">3</button>
+                <div id="word-input" class="btn-group submit-group" role="group">
+                  <button id="submit-word-1" type="button" class="btn submit">1</button>
+                  <button id="submit-word-2" type="button" class="btn submit">2</button>
+                  <button id="submit-word-3" type="button" class="btn submit">3</button>
                 </div>
 
             </div>
+
+            <div class="start-hidden board-word-PLAYER">
+                <hr>
+                <h2>One moment ... your captain is choosing a word</h2>
+            </div>
+
             <div class="progress-bar-wrapper start-hidden board-word board-select">
                 <div onclick="move()" id="progress-bar-back">
                     <div id="progress-bar" class="bar-red"></div>
