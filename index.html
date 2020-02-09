@@ -111,8 +111,15 @@
             <div class="word-input-wrapper start-hidden board-word">
                 <hr>
                 <h2>Your turn to submit word</h2>
-                <input id="word-input" class="word-input form-control" type="text" id="word-input" placeholder="Input word">
-                <button id="word-input-submit-btn" type="submit" class="submit btn">Submit</button>
+                <input class="word-input form-control" type="text" id="word-input" placeholder="Input word">
+                <!-- <button type="submit" class="submit btn">Submit</button> -->
+
+                <div class="btn-group submit-group" role="group">
+                  <button type="button" class="btn submit">1</button>
+                  <button type="button" class="btn submit">2</button>
+                  <button type="button" class="btn submit">3</button>
+                </div>
+
             </div>
             <div class="progress-bar-wrapper start-hidden board-word board-select">
                 <div onclick="move()" id="progress-bar-back">
