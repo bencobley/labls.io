@@ -23,6 +23,10 @@ def index():
         if type == "word":
             word = request.form.get('word')
             quantity = request.form.get('quantity')
+            if team == "blue":
+                game.setBlueChoice(word, quantity)
+            else:
+                game.setRedChoice(word, quantity)
             # TODO: save word to game state, to be returned in status
         elif type == "selections":
             selectedImageIds = json.loads(request.form.get('selections'))
