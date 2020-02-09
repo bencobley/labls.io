@@ -20,7 +20,7 @@ function formGetUrl(endpoint, data) {
 }
 
 
-   
+
 
 
 function log(data) {
@@ -190,6 +190,9 @@ class Image {
     // remove any existing classes associated with image and add class
     //    representing team owning image
     this.imageObject.removeClass().addClass("image-" + owner);
+    if (__game.player_role == "CAPTAIN") {
+      $('.image-wrapper img').addClass('show-border')
+    }
     // update src of image
     this.imageObject.attr("src", url);
 
@@ -266,6 +269,7 @@ function showBoardWord(player_role) {
   $('.start-hidden').hide();
   $('.board-word').show();
   $('.board-word-' + player_role).show();
+
 }
 
 function showBoardSelect() {
