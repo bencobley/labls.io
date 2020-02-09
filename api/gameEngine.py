@@ -1,3 +1,4 @@
+from Colour import Colour
 
 class GameEngine:
     def __init__(self):
