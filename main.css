@@ -45,6 +45,10 @@ body {
   padding-top: 15px;
 }
 
+.score-wrapper h2 {
+  font-size: 20px;
+}
+
 .blue-score {
   color: #0D4C80;
   font-weight: bold;
@@ -180,7 +184,7 @@ body {
 /*GAME OVER PAGE*/
 
 .game-over-score {
-  font-size: 48px;
+  font-size: 48px !important;
 }
 
 .play-again-wrapper {
@@ -197,6 +201,25 @@ body {
   width: 40%;
 }
 
+/*LOADING PAGE*/
+
+.loading-wrapper {
+  padding-top: 100px;
+}
+
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
 
 
 
