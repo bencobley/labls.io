@@ -47,6 +47,7 @@ function getStatus(game) {
 // });
 
 $(document).ready(function() {
+  showIntro();
   __game = new Game('2398732', '23342', 'PLAYER');
 
   setInterval(getStatus, update_interval, __game);
@@ -105,13 +106,14 @@ class Game {
 
     switch(stateCode) {
       case "INTRO":
-        this.showIntro();
+        showIntro();
         break;
       case "LOADING":
-        this.showLoading();
+        showLoading();
         break;
       case "BOARD-WORD":
         this.board.retrieveImages();
+        showBoardWord();
         if (this.player_role == "CAPTAIN") {
           // TODO: allow captain to select a word
           // TODO: set timer
@@ -121,6 +123,7 @@ class Game {
 
         break;
       case "BOARD-SELECT":
+        showBoardSelect();
         if (this.player_role == "PLAYER") {
           // TODO: allow player to select images
           // TODO: set maximum number of images to select
@@ -131,14 +134,16 @@ class Game {
         }
         break;
 
+      case "RESULT-ROUND":
+        showResultRound();
+
+      case "RESULT-GAME":
+        showResultGame();
+
       default:
         throw "Invalid Status Code";
       }
   }
-
-
-  showIntro() {}
-  showLoading() {}
 
 
 }
@@ -231,3 +236,45 @@ class Images {
   }
 
 }
+
+
+
+
+// ********* nav.js *************
+
+
+function showIntro() {
+  $('.start-hidden').hide();
+  $('.intro').show();
+}
+
+function showLoading() {
+  $('.start-hidden').hide();
+  $('.loading').show();
+}
+
+function showBoardWord() {
+  $('.start-hidden').hide();
+  $('.board-word').show();
+}
+
+function showBoardSelect() {
+  $('.start-hidden').hide();
+  $('.board-select').show();
+}
+
+function showResultRound() {
+  $('.start-hidden').hide();
+  $('.result-round').show();
+
+}
+
+function showResultGame () {
+  $('.start-hidden').hide();
+  $('.result-game').show();
+  document.getElementById("score").style.fontSize = "48px";
+
+}
+
+
+$('.lobby-submit').click(function() {showBoardSelect()});
