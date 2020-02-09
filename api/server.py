@@ -12,6 +12,9 @@ CORS(app)
 def index():
     request_type = request.args.get('type')
 
+    print("chosen: ", game.redChosen, game.blueChosen, game.getState())
+
+
     if request.method == 'POST':
         # For this type of request, information is being passed from frontend
         #       to backend
@@ -19,24 +22,36 @@ def index():
         type = request.form.get('type')
         team = request.form.get('team')
 
+        print ("POST TYPE: ", type)
+
         if type == "word":
             word = request.form.get('word')
             quantity = request.form.get('quantity')
             if team == "blue":
-                game.setBlueChoice(word, quantity)
-                game.setBlueQuantity(quantity)
+                game.setBlueWordChoice(word, quantity)
                 game.blueGuessed()
             else:
-                game.setRedChoice(word, quantity)
-                game.setRedQuantity(quantity)
+                game.setRedWordChoice(word, quantity)
                 game.redGuessed()
-            # TODO: save word to game state, to be returned in status
+
+            print("team::: ", request.form.get('team'))
+            if game.redChosen and game.blueChosen:
+                game.setState("BOARD-SELECT")
+
         elif type == "selections":
             selectedImages = json.loads(request.form.get('selections'))
             if team == "red":
                 game.setRedGuesses(selectedImages)
             else:
                 game.setBlueGuesses(selectedImages)
+
+            if game.haveBothChosenImages():
+                if game.roundNo >= game.totalRounds:
+                    game.setState("RESULT-GAME")
+                else:
+                    game.setState("RESULT-ROUND")
+
+        return '{"success": "true"}'
 
 
     else:
@@ -50,9 +65,9 @@ def index():
                     "teams":
                         [
                             {"redScore": game.returnRedScore()},
-                            {"redRoundScore": game.returnRedRoundScore},
+                            {"redRoundScore": game.getRedRoundScore()},
                             {"blueScore": game.returnBlueScore()},
-                            {"blueRoundScore": game.returnBlueRoundScore}
+                            {"blueRoundScore": game.getBlueRoundScore()}
                         ]
                 }
             }
@@ -60,21 +75,22 @@ def index():
             if game.getState() == "BOARD-SELECT":
                 if team == "red":
                     newAttributes = attributes.get("attributes")
-                    newAttributes.update({"word": game.getRedWord, "quantity": game.getRedQuantity})
+                    newAttributes.update({"word": game.getRedWord(), "quantity": game.getRedQuantity()})
                     attributes.update({"attributes": newAttributes})
                 else:
                     newAttributes = attributes.get("attributes")
-                    newAttributes.update({"word": game.getBlueWord, "quantity": game.getBlueQuantity})
+                    newAttributes.update({"word": game.getBlueWord(), "quantity": game.getBlueQuantity()})
                     attributes.update({"attributes": newAttributes})
 
 
             response = {
              "data": {
-                 "type": "status",
-                "attributes": attributes
+                    "type": "status",
+                    "attributes": attributes
 
              }
             }
+
             return json.dumps(response)
 
 

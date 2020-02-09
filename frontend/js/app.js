@@ -78,17 +78,22 @@ class Game {
 
     switch(data.type) {
       case "status":
+        console.log("state: ", data.attributes.state)
         if (data.attributes.state == "INTRO") {
           this.toState("INTRO");
         } else if (data.attributes.state == "LOADING") {
           this.toState("LOADING");
         } else if (data.attributes.state == "BOARD-WORD") {
           this.toState("BOARD-WORD");
-        } else if (data.attributes.state == "BOARD-SELECT") {
+        } else if (data.attributes.attributes.state == "BOARD-SELECT") {
           // game word and quantity must be sent in 'data'
-          this.current_round_word = data.attributes.word;
-          this.max_player_selections = parseInt(data.attributes.quantity);
-
+          this.current_round_word = data.attributes.attributes.word;
+          this.max_player_selections = parseInt(data.attributes.attributes.quantity);
+          this.toState("BOARD-SELECT");
+        } else if (data.attributes.state == "RESULT-ROUND") {
+          this.toState("RESULT-ROUND");
+        } else if (data.attributes.state == "RESULT-GAME") {
+          this.toState("RESULT-GAME");
         }
         break;
 
@@ -157,8 +162,8 @@ class Board {
   }
 
   updateBoard(images) {
-    debugger;
-    images = images.data.attributes.images;
+
+    images = JSON.parse(images).data.attributes.images;
     this.images = new Images();
 
     for (var i = 0; i < images.length; i++) {
@@ -194,13 +199,17 @@ class Image {
           self.imageObject.addClass('show-border');
           self.selected = true;
         }
-        if (self.parentArray.countSelected() == __game.max_player_selections) {
+        var count = self.parentArray.countSelected()
+        if (count >= __game.max_player_selections && count > 0) {
           var selectedImages = self.parentArray.getSelected();
           var selectedImageIDs = [];
           for (var i = 0; i < selectedImages.length; i++) {
             selectedImageIDs.push(selectedImages[i].id);
           }
-          postToAPI({selections: JSON.stringify(selectedImageIDs)})
+          postToAPI({
+            type: "selections",
+            selections: JSON.stringify(selectedImageIDs)
+          })
         }
       }
     });
@@ -284,7 +293,7 @@ $(document).ready(function() {
   var team = new URLSearchParams(window.location.search).get('team');
   var role = new URLSearchParams(window.location.search).get('role');
 
-  // BEN DO IT HERE 
+  // BEN DO IT HERE
 
   if (team == "red") {
     $('.team-text').color("#D62839")
@@ -300,15 +309,17 @@ $(document).ready(function() {
 
   __game = new Game('2398732', team, role);
 
-  $('.lobby-submit').click(function() {showBoardSelect()});
+  $('.lobby-submit').click(function() {
+    __game.toState("BOARD-WORD");
+  });
   $('#submit-word-1').click(function() {
-    postToAPI({word: $('#word-input').val(), quantity: 1})
+    postToAPI({team: __game.team_id, type: "word", word: $('#word-input').val(), quantity: 1})
   });
   $('#submit-word-2').click(function() {
-    postToAPI({word: $('#word-input').val(), quantity: 2})
+    postToAPI({team: __game.team_id, type: "word", word: $('#word-input').val(), quantity: 2})
   });
   $('#submit-word-3').click(function() {
-    postToAPI({word: $('#word-input').val(), quantity: 3})
+    postToAPI({team: __game.team_id, type: "word", word: $('#word-input').val(), quantity: 3})
   });
 
   setInterval(getStatus, update_interval, __game);
