@@ -3,15 +3,15 @@ import time
 
 class GameEngine:
     def __init__(self):
-        self.currentState = "INTRO"
+        self.currentState = "BOARD-WORD"
         self.redScore = 0
         self.redRoundScore = 0
         self.blueRoundScore = 0
         self.blueScore = 0
         self.redLost = False
         self.blueLost = False
-        self.redWordChoice = "CHANGE THIS"
-        self.blueWordChoice = "CHANGE THIS"
+        self.redWordChoice = ""
+        self.blueWordChoice = ""
         self.redNumberChoice = 0
         self.blueNumberChoice = 0
         self.currentPhotos = []
@@ -20,36 +20,34 @@ class GameEngine:
         self.redChosen = False
         self.blueChosen = False
 
+        self.redChosenImages = False
+        self.blueChosenImages = False
 
-    def play(self):
-        self.currentState = "LOADING"
-        round = 0
-        NUMBER_OF_ROUNDS = 3
-        while round < NUMBER_OF_ROUNDS:
-            self.playRound()
-            if self.redLost or self.blueLost:
-                break
-            round += 1
-            self.currentState = "RESULT-ROUND"
-            # passes through redRoundScore and blueRoundScore to server
-        self.returnResults()  # get result and create json thing here to send
-        self.currentState = "RESULT-GAME"
+        self.roundNo = 1
+        self.totalRounds = 3
+
+        self.initRound()
+
+    def nextRound(self):
+        self.initRound()
+        self.roundNo += 1
 
 
-
-    def playRound(self):
+    def initRound(self):
+        self.redChosenImages = False
+        self.blueChosenImages = False
         self.redChosen = False
         self.blueChosen = False
         photos = self.generateImages()
         self.currentPhotos = photos
-        redPhotos = photos[:4]
-        bluePhotos = photos[4:7]
-        blackPhoto = photos[-1]
+        self.redPhotos = photos[:4]
+        self.bluePhotos = photos[4:7]
+        self.blackPhoto = photos[-1]
         self.currentState = "BOARD-WORD"
-        while self.currentState == "BOARD-WORD":
-            time.sleep(0.5)
-        self.calculateScore(self.redGuess, redPhotos, blackPhoto, "red")
-        self.calculateScore(self.blueGuess, bluePhotos, blackPhoto, "blue")
+
+    def calculateScores(self):
+        self.calculateScore(self.redGuess, self.redPhotos, self.blackPhoto, "red")
+        self.calculateScore(self.blueGuess, self.bluePhotos, self.blackPhoto, "blue")
 
     def calculateScore(self, guesses, teamphotos, blackphoto, team):
         currentTeam = 0
@@ -76,7 +74,15 @@ class GameEngine:
 
     def generateImages(self):
         # method should randomly select 8 images from database
-        return ["1", "2", "3", "4", "5", "6", "7", "8"]
+        return ["http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg",
+                "http://localhost/img/pet/cat/cat3.jpeg"]
+
 
     def setRedWordChoice(self, word, number):
         self.redWordChoice = word
@@ -155,6 +161,11 @@ class GameEngine:
     def redGuessed(self):
         self.redChosen = True
 
+    def haveBothChosenImages(self):
+        return self.redChosenImages and self.blueChosenImages
+
+    def haveBothChosenWords(self):
+        return self.redChosen and self.blueChosen
 
     def getBlueQuantity(self):
         return self.blueNumberChoice
