@@ -1,34 +1,44 @@
 
 
 $(document).ready(function() {
-  $('.start-hidden').hide();
-  showResultRound();
+  showIntro();
 });
 
 
 function showIntro() {
+  $('.start-hidden').hide();
   $('.intro').show();
 }
 
 function showLoading() {
- $('.loading').show();
+  $('.start-hidden').hide();
+  $('.loading').show();
 }
 
 function showBoardWord() {
- $('.board-word').show();
+  $('.start-hidden').hide();
+  $('.board-word').show();
 }
 
 function showBoardSelect() {
+  $('.start-hidden').hide();
   $('.board-select').show();
 }
 
 function showResultRound() {
+  $('.start-hidden').hide();
   $('.result-round').show();
 
 }
 
 function showResultGame () {
+  $('.start-hidden').hide();
   $('.result-game').show();
   document.getElementById("score").style.fontSize = "48px";
 
 }
+
+
+$('.lobby-submit').click(function() {showBoardSelect()});
+
+

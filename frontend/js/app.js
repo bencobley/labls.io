@@ -7,7 +7,7 @@ var update_interval = 1000;
 
 /*******************************************************/
 
-var board_images;
+var __game;
 
 
 function formGetUrl(endpoint, data) {
@@ -41,17 +41,18 @@ function getStatus(game) {
   });
 }
 
-// ).done(function( data ) {
-//     console.log('done');
-//     game.update(data);
-// });
+function postToAPI(data) {
+  console.log("Posting to " + endpoint_url, data);
+  $.ajax({
+      type: 'POST',
+      url: endpoint_url,
+      data: data,
+      success: function(response) {console.log(response)},
+  });
 
-$(document).ready(function() {
-  var game = new Game('2398732', '23342', 'PLAYER');
+}
 
-  setInterval(getStatus, update_interval, game);
 
-});
 
 
 class Game {
@@ -62,6 +63,7 @@ class Game {
     this.player_role = player_role;   // "CAPTAIN" or "PLAYER"
     this.current_state = "";
     this.current_round_word = "";
+    this.max_player_selections = 0;
     this.board = new Board();
   }
 
@@ -77,7 +79,6 @@ class Game {
 
     switch(data.type) {
       case "status":
-        // debugger;
         if (data.attributes.state == "INTRO") {
           this.toState("INTRO");
         } else if (data.attributes.state == "LOADING") {
@@ -85,8 +86,9 @@ class Game {
         } else if (data.attributes.state == "BOARD-WORD") {
           this.toState("BOARD-WORD");
         } else if (data.attributes.state == "BOARD-SELECT") {
-          // game word must be sent in 'data'
+          // game word and quantity must be sent in 'data'
           this.current_round_word = data.attributes.word;
+          this.max_player_selections = parseInt(data.attributes.quantity);
 
         }
         break;
@@ -102,22 +104,19 @@ class Game {
 
     switch(stateCode) {
       case "INTRO":
-        this.showIntro();
+        showIntro();
         break;
       case "LOADING":
-        this.showLoading();
+        showLoading();
         break;
       case "BOARD-WORD":
         this.board.retrieveImages();
-        if (this.player_role == "CAPTAIN") {
-          // TODO: allow captain to select a word
-          // TODO: set timer
-        } else {
-          // TODO: player must wait while captain selects a word
-        }
+        showBoardWord(this.player_role);
+        // TODO: set timer
 
         break;
       case "BOARD-SELECT":
+        showBoardSelect();
         if (this.player_role == "PLAYER") {
           // TODO: allow player to select images
           // TODO: set maximum number of images to select
@@ -128,14 +127,16 @@ class Game {
         }
         break;
 
+      case "RESULT-ROUND":
+        showResultRound();
+
+      case "RESULT-GAME":
+        showResultGame();
+
       default:
         throw "Invalid Status Code";
       }
   }
-
-
-  showIntro() {}
-  showLoading() {}
 
 
 }
@@ -162,7 +163,7 @@ class Board {
 
     for (var i = 0; i < images.length; i++) {
       this.images.add(
-        new Image(images[i], i, images[i].url, images[i].owner, this.images))
+        new Image(images[i].id, i, images[i].url, images[i].owner, this.images))
     }
 
   }
@@ -184,23 +185,25 @@ class Image {
     // remove any existing classes associated with image and add class
     //    representing team owning image
     this.imageObject.removeClass().addClass("image-" + owner);
+    // update src of image
+    this.imageObject.attr("src", url);
 
-    // if (this.game.player_role == "PLAYER") {
-    // TODO: only players can select
     this.wrapperObject.on("click", function() {
-      if (self.parentArray.countSelected() < 3) {
-        self.imageObject.addClass('show-border');
-        self.selected = true;
+      if (__game.player_role == "PLAYER") {
+        if (self.parentArray.countSelected() < __game.max_player_selections) {
+          self.imageObject.addClass('show-border');
+          self.selected = true;
+        }
+        if (self.parentArray.countSelected() == __game.max_player_selections) {
+          var selectedImages = self.parentArray.getSelected();
+          var selectedImageIDs = [];
+          for (var i = 0; i < selectedImages.length; i++) {
+            selectedImageIDs.push(selectedImages[i].id);
+          }
+          postToAPI({selections: JSON.stringify(selectedImageIDs)})
+        }
       }
     });
-    // }
-  }
-
-
-
-  setClickable() {
-
-
   }
 
 
@@ -217,13 +220,80 @@ class Images {
   }
 
   countSelected() {
-    var cnt = 0;
-    for (var i = 0; i < this.images.length; i++) {
-      if (this.images[i].selected) {
-        cnt ++;
-      }
-    }
-    return cnt;
+    return this.getSelected().length;
 
   }
+
+  getSelected() {
+    var selected = [];
+    for (var i = 0; i < this.images.length; i++) {
+      if (this.images[i].selected) {
+        selected.push(this.images[i]);
+      }
+    }
+    return selected;
+
+  }
+
 }
+
+
+
+
+// ********* nav.js *************
+
+
+function showIntro() {
+  $('.start-hidden').hide();
+  $('.intro').show();
+}
+
+function showLoading() {
+  $('.start-hidden').hide();
+  $('.loading').show();
+}
+
+function showBoardWord(player_role) {
+  $('.start-hidden').hide();
+  $('.board-word').show();
+  $('.board-word-' + player_role).show();
+}
+
+function showBoardSelect() {
+  $('.start-hidden').hide();
+  $('.board-select').show();
+}
+
+function showResultRound() {
+  $('.start-hidden').hide();
+  $('.result-round').show();
+
+}
+
+function showResultGame () {
+  $('.start-hidden').hide();
+  $('.result-game').show();
+  document.getElementById("score").style.fontSize = "48px";
+
+}
+
+
+$(document).ready(function() {
+  showIntro();
+
+  __game = new Game('2398732', '23342', 'PLAYER');
+
+  $('.lobby-submit').click(function() {showBoardSelect()});
+  $('#submit-word-1').click(function() {
+    postToAPI({word: $('#word-input').val(), quantity: 1})
+  });
+  $('#submit-word-2').click(function() {
+    postToAPI({word: $('#word-input').val(), quantity: 2})
+  });
+  $('#submit-word-3').click(function() {
+    postToAPI({word: $('#word-input').val(), quantity: 3})
+  });
+
+  setInterval(getStatus, update_interval, __game);
+
+});
