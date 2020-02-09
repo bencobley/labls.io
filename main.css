@@ -122,7 +122,6 @@ body {
 
 .image-black {
   border-color: black;
-  border-style: solid;
 }
 
 .word-input-wrapper {
@@ -243,12 +242,3 @@ body {
     transform: rotate(359deg);
   }
 }
-
-
-
-
-
-
-
-
-
