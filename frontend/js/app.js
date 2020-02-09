@@ -41,18 +41,18 @@ function getStatus(game) {
   });
 }
 
-// ).done(function( data ) {
-//     console.log('done');
-//     game.update(data);
-// });
+function postToAPI(data) {
+  console.log("Posting to " + endpoint_url, data);
+  $.ajax({
+      type: 'POST',
+      url: endpoint_url,
+      data: data,
+      success: function(response) {console.log(response)},
+  });
 
-$(document).ready(function() {
-  showIntro();
-  __game = new Game('2398732', '23342', 'PLAYER');
+}
 
-  setInterval(getStatus, update_interval, __game);
 
-});
 
 
 class Game {
@@ -79,7 +79,6 @@ class Game {
 
     switch(data.type) {
       case "status":
-        // debugger;
         if (data.attributes.state == "INTRO") {
           this.toState("INTRO");
         } else if (data.attributes.state == "LOADING") {
@@ -170,7 +169,7 @@ class Board {
 
     for (var i = 0; i < images.length; i++) {
       this.images.add(
-        new Image(images[i], i, images[i].url, images[i].owner, this.images))
+        new Image(images[i].id, i, images[i].url, images[i].owner, this.images))
     }
 
   }
@@ -196,11 +195,18 @@ class Image {
     this.imageObject.attr("src", url);
 
     this.wrapperObject.on("click", function() {
-      debugger;
       if (__game.player_role == "PLAYER") {
         if (self.parentArray.countSelected() < __game.max_player_selections) {
           self.imageObject.addClass('show-border');
           self.selected = true;
+        }
+        if (self.parentArray.countSelected() == __game.max_player_selections) {
+          var selectedImages = self.parentArray.getSelected();
+          var selectedImageIDs = [];
+          for (var i = 0; i < selectedImages.length; i++) {
+            selectedImageIDs.push(selectedImages[i].id);
+          }
+          postToAPI({selections: JSON.stringify(selectedImageIDs)})
         }
       }
     });
@@ -220,7 +226,7 @@ class Images {
   }
 
   countSelected() {
-    return this.countSelected.length;
+    return this.getSelected().length;
 
   }
 
@@ -277,4 +283,16 @@ function showResultGame () {
 }
 
 
-$('.lobby-submit').click(function() {showBoardSelect()});
+$(document).ready(function() {
+  showIntro();
+
+  __game = new Game('2398732', '23342', 'PLAYER');
+
+  $('.lobby-submit').click(function() {showBoardSelect()});
+  $('#word-input-submit-btn').click(function() {
+    postToAPI({word: $('#word-input').val()})
+  });
+
+  setInterval(getStatus, update_interval, __game);
+
+});
