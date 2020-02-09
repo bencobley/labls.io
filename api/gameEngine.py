@@ -1,5 +1,6 @@
 from Colour import Colour
 
+
 class GameEngine:
     def __init__(self):
         self.currentState = "INTRO"
@@ -9,55 +10,54 @@ class GameEngine:
         self.blueScore = 0
         self.redLost = False
         self.blueLost = False
+        self.currentPhotos = []
 
 
     def play(self):
         round = 0
         NUMBER_OF_ROUNDS = 3
-        while(round < NUMBER_OF_ROUNDS):
+        while round < NUMBER_OF_ROUNDS:
             self.playRound()
             if self.redLost or self.blueLost:
                 break
             round += 1
             self.currentState = "ROUND_RESULT"
-            #passes through redRoundScore and blueRoundScore to server
-        self.returnResults()#get result and create json thing here to send
+            # passes through redRoundScore and blueRoundScore to server
+        self.returnResults()  # get result and create json thing here to send
         self.currentState = "GAME_RESULT"
-
 
     def returnResults(self):
         if self.redLost == True and self.blueLost == True:
-           #return draw to server
-           pass
+            # return draw to server
+            pass
         elif self.redLost == True:
-            #red hit a bomb, return blues points and red loses
+            # red hit a bomb, return blues points and red loses
             pass
         elif self.blueLost == True:
-            #same as above, define other method and pass in team
+            # same as above, define other method and pass in team
             pass
         else:
             # return scores of both teams
             pass
 
-
     def playRound(self):
         photos = self.generateImages()
+        self.currentPhotos = photos
         redPhotos = photos[:4]
         bluePhotos = photos[4:7]
         blackPhoto = photos[-1]
         self.currentState = "CAPTAIN"
-        #send photos to server
-        #recieve captain choices
+        # send photos to server
+        # recieve captain choices
         redChoice = ["CHANGE THIS", 0]
         blueChoice = ["CHANGE THIS", 0]
         # Send word to server
         self.currentState = "PLAYER"
         # receive player choices
-        redGuess = ["2", "4" ,"7"]
-        blueGuess = ["1", "2", "3"] #GET THESE FROM THE SERVER
+        redGuess = ["2", "4", "7"]
+        blueGuess = ["1", "2", "3"]  # GET THESE FROM THE SERVER
         self.calculateScore(redGuess, redPhotos, blackPhoto, Colour.RED)
         self.calculateScore(bluePhotos, bluePhotos, blackPhoto, Colour.BLUE)
-
 
     def calculateScore(self, guesses, teamphotos, blackphoto, team):
         currentTeam = 0
@@ -82,17 +82,54 @@ class GameEngine:
             self.blueRoundScore = currentTeam
             self.blueScore += self.blueRoundScore
 
-
     def generateImages(self):
-        #method should randomly select 8 images from database
+        # method should randomly select 8 images from database
         return ["1", "2", "3", "4", "5", "6", "7", "8"]
 
+    def getStatus(self):
+        return self.currentState
 
+    def returnRedScore(self):
+        return self.redScore
 
+    def returnBlueScore(self):
+        return self.blueScore
 
+    def returnImageMap(self):
 
+        imageMap = [{
+            "url" : self.currentPhotos[0],
+            "owner" : "red"
+        },
+            {
+                "url" : self.currentPhotos[1],
+                "owner" : "red"
+            },
 
+            {
+                "url" : self.currentPhotos[2],
+                "owner" : "red"
+            },
+            {
+                "url" : self.currentPhotos[3],
+                "owner" : "red"
+            },
+            {
+                "url" : self.currentPhotos[4],
+                "owner" : "blue"
+            },
+            {
+                "url" : self.currentPhotos[5],
+                "owner" : "blue"
+            },
+            {
+                "url" : self.currentPhotos[6],
+                "owner" : "blue"
+            },
+            {
+                "url" : self.currentPhotos[7],
+                "owner" : "black"
+            },
 
-
-
-
+        ]
+        return imageMap

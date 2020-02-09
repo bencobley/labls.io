@@ -53,7 +53,7 @@ Submit word (by captain)
 Request for images
   Request:
 
-    GET request to: http://url.com/api/request?type=images&gid=<GAME_ID>&uid=<USER_ID>
+    GET request to: http://url.com/api/request?type=status&gid=<GAME_ID>&uid=<USER_ID>
 
   Response:
 
