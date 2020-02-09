@@ -2,7 +2,7 @@
 
 /*************** Application variables *****************/
 
-var endpoint_url = 'http://192.168.0.73:5000/';
+var endpoint_url = ' http://127.0.0.1:5000/api';
 var update_interval = 1000;
 
 /*******************************************************/
@@ -16,7 +16,7 @@ function formGetUrl(endpoint, data) {
     url += key + "=" + data[key] + "&";
   });
   return (url.charAt(url.length - 1) == "&" ?
-    url.substring(0, url.length - 2) : url);
+    url.substring(0, url.length - 1) : url);
 }
 
 
@@ -28,10 +28,10 @@ function log(data) {
 }
 
 function getStatus(game) {
-  console.log("Getting status.");
+  console.log("Getting status.", formGetUrl(endpoint_url, {team: __game.team_id, type: "status"}));
   $.ajax({
       type: 'GET',
-      url: "frontend/data/status_BOARD-WORD.json", // formGetUrl(endpoint_url, data),
+      url:  formGetUrl(endpoint_url, {team: __game.team_id, type: "status"}),
       success: function(data) {
         game.update(data, game)
       },
@@ -69,8 +69,7 @@ class Game {
 
 
   update(data) {
-
-    data = data.data;
+    data = JSON.parse(data).data;
 
     if (this.current_state == data.attributes.state) {
       // no change in state: no need to update
@@ -151,13 +150,14 @@ class Board {
   retrieveImages() {
     $.ajax({
         type: 'GET',
-        url: "frontend/data/images.json", // formGetUrl(endpoint_url, data),
+        url: formGetUrl(endpoint_url, {team: __game.team_id, type: "images"}),
         success: this.updateBoard,
         error: function() {alert('error')}
     });
   }
 
   updateBoard(images) {
+    debugger;
     images = images.data.attributes.images;
     this.images = new Images();
 
@@ -281,7 +281,12 @@ function showResultGame () {
 $(document).ready(function() {
   showIntro();
 
-  __game = new Game('2398732', '23342', 'PLAYER');
+  var team = new URLSearchParams(window.location.search).get('team');
+  var role = new URLSearchParams(window.location.search).get('role');
+
+  // BEN DO IT HERE 
+
+  __game = new Game('2398732', team, role);
 
   $('.lobby-submit').click(function() {showBoardSelect()});
   $('#submit-word-1').click(function() {
