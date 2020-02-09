@@ -20,18 +20,18 @@ class GameEngine:
             round += 1
             self.currentState = "ROUND_RESULT"
             #passes through redRoundScore and blueRoundScore to server
+        self.returnResults()#get result and create json thing here to send
         self.currentState = "GAME_RESULT"
-        self.returnResults()#send scores to server
 
 
     def returnResults(self):
-        if redLost == True and blueLost == True:
+        if self.redLost == True and self.blueLost == True:
            #return draw to server
            pass
-        elif redLost == True:
+        elif self.redLost == True:
             #red hit a bomb, return blues points and red loses
             pass
-        elif blueLost == True:
+        elif self.blueLost == True:
             #same as above, define other method and pass in team
             pass
         else:
@@ -73,16 +73,17 @@ class GameEngine:
         if team == Colour.RED:
             self.redLost = bomb
             self.redRoundScore = currentTeam
-            self.redScore += redRoundScore
+            self.redScore += self.redRoundScore
             self.blueScore += otherTeam
         elif team == Colour.BLUE:
             self.blueLost = bomb
             self.redScore += otherTeam
             self.blueRoundScore = currentTeam
-            self.blueScore += blueRoundScore
+            self.blueScore += self.blueRoundScore
 
 
     def generateImages(self):
+        #method should randomly select 8 images from database
         return ["1", "2", "3", "4", "5", "6", "7", "8"]
 
 
