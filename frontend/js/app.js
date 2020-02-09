@@ -7,7 +7,7 @@ var update_interval = 1000;
 
 /*******************************************************/
 
-var board_images;
+var __game;
 
 
 function formGetUrl(endpoint, data) {
@@ -47,9 +47,9 @@ function getStatus(game) {
 // });
 
 $(document).ready(function() {
-  var game = new Game('2398732', '23342', 'PLAYER');
+  __game = new Game('2398732', '23342', 'PLAYER');
 
-  setInterval(getStatus, update_interval, game);
+  setInterval(getStatus, update_interval, __game);
 
 });
 
@@ -62,6 +62,7 @@ class Game {
     this.player_role = player_role;   // "CAPTAIN" or "PLAYER"
     this.current_state = "";
     this.current_round_word = "";
+    this.max_player_selections = 0;
     this.board = new Board();
   }
 
@@ -87,6 +88,8 @@ class Game {
         } else if (data.attributes.state == "BOARD-SELECT") {
           // game word must be sent in 'data'
           this.current_round_word = data.attributes.word;
+          // TODO: remove magic no
+          this.max_player_selections = 3;
 
         }
         break;
@@ -184,23 +187,18 @@ class Image {
     // remove any existing classes associated with image and add class
     //    representing team owning image
     this.imageObject.removeClass().addClass("image-" + owner);
+    // update src of image
+    this.imageObject.attr("src", url);
 
-    // if (this.game.player_role == "PLAYER") {
-    // TODO: only players can select
     this.wrapperObject.on("click", function() {
-      if (self.parentArray.countSelected() < 3) {
-        self.imageObject.addClass('show-border');
-        self.selected = true;
+      debugger;
+      if (__game.player_role == "PLAYER") {
+        if (self.parentArray.countSelected() < __game.max_player_selections) {
+          self.imageObject.addClass('show-border');
+          self.selected = true;
+        }
       }
     });
-    // }
-  }
-
-
-
-  setClickable() {
-
-
   }
 
 
@@ -217,13 +215,19 @@ class Images {
   }
 
   countSelected() {
-    var cnt = 0;
-    for (var i = 0; i < this.images.length; i++) {
-      if (this.images[i].selected) {
-        cnt ++;
-      }
-    }
-    return cnt;
+    return this.countSelected.length;
 
   }
+
+  getSelected() {
+    var selected = [];
+    for (var i = 0; i < this.images.length; i++) {
+      if (this.images[i].selected) {
+        selected.push(this.images[i]);
+      }
+    }
+    return selected;
+
+  }
+
 }
