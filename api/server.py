@@ -1,16 +1,60 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
+from gameEngine import GameEngine
+import json
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/api', methods=['GET','POST'])
 def index():
+    user_id = request.args.get('uid')
+    game_id = request.args.get('gid')
+    request_type = request.args.get('type')
 
-    return "hello" + request.args.get('user')
+    if request.method == 'POST':
+        # For this type of request, information is being passed from frontend
+        #       to backend
+
+        type = request.form.get('type')
+        team = request.form.get('team')
+
+        if type == "word":
+            word = request.form.get('word')
+            quantity = request.form.get('quantity')
+            # TODO: save word to game state, to be returned in status
+        elif type == "selections":
+            selectedImageIds = json.loads(request.form.get('selections'))
 
 
-if __name__ == '__main__':
-    app.run()
+    else:
+        if request_type == "status":
+            response = {
+                    "data": {
+                        "type": "status",
+                        "attributes": {
+                            "playerTeam": playerTeam,
 
+                        }
+                    }
+
+                }
+            return json.dumps(response)
+
+        elif request_type == "images":
+
+
+
+    # type=images&gid=<GAME_ID>&uid=<USER_ID>
+
+
+
+
+    # return request.args.get("user")
+
+
+
+game = gameEngine()
+
+app.run()
