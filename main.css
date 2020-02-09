@@ -139,17 +139,20 @@ body {
 }
 
 .word-input {
-  width: 75%;
+  width: 65%;
   display: inline-block;
   /*line-height: 30px;  */
   margin-bottom: 20px;
 }
 
-.submit {
-  display: inline-block;
+.submit-group {
+  /*display: inline-block;*/
   float: right;
-  background-color: black;
   margin-bottom: 20px;
+}
+
+.submit {
+  background-color: black;
   color: white;
 }
 
