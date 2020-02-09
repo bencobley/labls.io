@@ -11,18 +11,41 @@
     </head>
     <body>
         <main role="main" class="container">
+            
+            <!-- ****** HEADER ELEMENTS ****** -->
             <h1>labls.io</h1>
-            <div class="team-red">
-                <h2>Red Team</h2>
+
+            <div class="slogan-wrapper start-hidden intro">
+                <h2>The image guessing game</h2>
             </div>
+
+            <div class="game-over-wrapper start-hidden result-game">
+                <h2>Game over!</h2>
+            </div>
+
+            <div class="team-wrapper start-hidden board-word board-select loading">
+                <h2 class="red-team">Red Team</h2>
+            </div>
+
+            <div class="score-wrapper start-hidden board-word board-select loading result-game">
+                <h2 id="score"><span id=red-score class="red-score">X</span> - <span id="blue-score" class="blue-score">X</span></h2>
+            </div>
+
             <hr>
-            <div class="score-wrapper">
-                <h2><span id=red-score class="red-score">5</span> - <span id="blue-score" class="blue-score">3</span></h2>
+
+
+            <!-- ****** MAIN BODY ELEMENTS ****** -->
+
+            <div class="lobby-wrapper start-hidden intro">
+                <h2>Join lobby</h2>
+                <input class="lobby-input form-control" type="text" id="server-input" placeholder=Keyword>
+                <button type="submit" class="lobby-submit btn">Submit</button>
             </div>
-            <div class="round-wrapper" >
-                <h2>There are <span id=number-images class="number-images">3</span> images desribed by: <span id="word" class="word">cat</span></h2>
+
+            <div class="round-wrapper start-hidden board-select" >
+                <h2>There are <span id=number-images class="number-images">X</span> images desribed by: <span id="word" class="word">XXX</span></h2>
             </div>
-            <div class="board-wrapper">
+            <div class="board-wrapper start-hidden board-word board-select">
                 <div id="image-wrapper-0" class="image-wrapper">
                     <img id="image-0" data-id="" src="img/cat1.jpeg" class="image-red show-border">
                 </div
@@ -48,47 +71,70 @@
                     <img id="image-7" data-id="" src="img/cat1.jpeg" class="">
                 </div>
             </div>
+
+            <div class="loading-wrapper start-hidden loading">
+                <h2>Waiting for your turn...</h2>
+                <h2 class="rotate" style="font-size: 48px">&#129302;</h2>
+
+            </div>
+
+            <div class="play-again-wrapper start-hidden result-game">
+                <h2>XXX team won! &#x1F389; &#x1F389; &#x1F389;</h2>
+                <h2>Thanks for labl.ing!</h2>
+                <button type="submit" class="play-again-submit btn">Play again</button>
+            </div>
+
+
         </main>
 
-        <button onclick="move()">Click Me</button>
-        <footer class="footer" style="display: none">
-            <div class="progress-bar-wrapper">
-                <div id="progress-bar-back">
+
+        <!-- ****** FOOTER ELEMENTS ****** -->
+        <footer class="footer">
+            <div class="made-with-love start-hidden intro result-game">
+                <h2>A human computation experiment</h2>
+                <h2>Built with &#10084;&#65039;at ICHack 2020</h2>
+                <h2><a href="https://github.com/bencobley/labls.io">Open source on GitHub</a></h2>
+            </div>
+
+
+            <div class="word-input-wrapper start-hidden board-word">
+                <hr>
+                <h2>Your turn to submit word</h2>
+                <input class="word-input form-control" type="text" id="word-input" placeholder="Input word">
+                <button type="submit" class="submit btn">Submit</button>
+            </div>
+            <div class="progress-bar-wrapper start-hidden board-word board-select">
+                <div onclick="move()" id="progress-bar-back">
                     <div id="progress-bar" class="bar-red"></div>
                 </div>
             </div>
         </footer>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="frontend/js/app.js"></script>
+        <script src="nav.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript">var i = 0;
+        function move() {
+        if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("progress-bar");
+        var width = 1;
+        var id = setInterval(frame, 10);
+        function frame() {
+        if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+        } else {
+        width += 0.1;
+        elem.style.width = width + "%";
+        }
+        }
+        }
+        }</script>
 
-        <footer class="footer">
-          <div class="container">
-            <hr>
-            <h2>Your turn to submit word</h2>
-            <input class="word-input form-control" type="text" id="word-input" placeholder="Input word">
-            <button type="submit" class="submit btn">Submit</button>
-          </div>
-        </footer>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="frontend/js/app.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            <script type="text/javascript">var i = 0;
-            function move() {
-            if (i == 0) {
-            i = 1;
-            var elem = document.getElementById("progress-bar");
-            var width = 1;
-            var id = setInterval(frame, 10);
-            function frame() {
-            if (width >= 100) {
-            clearInterval(id);
-            i = 0;
-            } else {
-            width += 0.1;
-            elem.style.width = width + "%";
-            }
-            }
-            }
-            }</script>
-        </body>
-    </html>
+
+    </body>
+</html>

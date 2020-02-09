@@ -42,7 +42,6 @@ body {
 }
 
 .score-wrapper {
-  padding-top: 15px;
 }
 
 .score-wrapper h2 {
@@ -59,12 +58,17 @@ body {
   font-weight: bold;
 }
 
-.team-red {
+
+.team-wrapper {
+
+}
+
+.red-team {
   text-align: center;
   color: #D62839;
 }
 
-.team-blue {
+.blue-team {
   text-align: center;
   color: #0D4C80;
 }
@@ -121,6 +125,10 @@ body {
   border-style: solid;
 }
 
+.word-input-wrapper {
+  padding: 0px 15px;
+}
+
 .word-input {
   width: 75%;
   display: inline-block;
@@ -147,7 +155,7 @@ body {
 
 #progress-bar {
   width: 1%;
-  height: 40px;
+  height: 10px;
   background-color: black;
 }
 
@@ -182,10 +190,6 @@ body {
 }
 
 /*GAME OVER PAGE*/
-
-.game-over-score {
-  font-size: 48px !important;
-}
 
 .play-again-wrapper {
   padding-top: 100px;
