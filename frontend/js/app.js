@@ -295,6 +295,18 @@ $(document).ready(function() {
 
   // BEN DO IT HERE
 
+  if (team == "red") {
+    $('.team-text').color("#D62839")
+    $('.team-text').text("Red team")
+    $('#progress-bar').backgroundColor("#D62839")
+  }
+
+  if (team == "blue") {
+    $('.team-text').color("#0D4C80")
+    $('.team-text').text("Blue team")
+    $('#progress-bar').backgroundColor("#0D4C80")
+  }
+
   __game = new Game('2398732', team, role);
 
   $('.lobby-submit').click(function() {
