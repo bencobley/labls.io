@@ -74,14 +74,16 @@ class GameEngine:
 
     def generateImages(self):
         # method should randomly select 8 images from database
-        return ["http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg",
-                "http://localhost/img/pet/cat/cat3.jpeg"]
+
+        return ['img/Animals/snake1.jpg', 'img/Animals/fish2.jpg', 'img/Animals/cat2.jpg', 'img/Animals/dog2.jpg', 'img/Animals/giraffe1.jpg', 'img/Animals/dog1.jpg', 'img/Animals/fish1.jpg', 'img/Animals/nemo1.jpg']
+        # return ["http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg",
+        #         "http://localhost/img/pet/cat/cat3.jpeg"]
 
 
     def setRedWordChoice(self, word, number):
