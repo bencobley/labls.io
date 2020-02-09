@@ -1,4 +1,6 @@
 
+/*GENERAL*/
+
 html {
   position: relative;
   min-height: 100%;
@@ -27,6 +29,17 @@ body {
   width: 100%;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.made-with-love {
+  padding-bottom: 20px;
+  color: #aaaaaa
+}
 
 .score-wrapper {
   padding-top: 15px;
@@ -42,6 +55,19 @@ body {
   font-weight: bold;
 }
 
+.team-red {
+  text-align: center;
+  color: #D62839;
+}
+
+.team-blue {
+  text-align: center;
+  color: #0D4C80;
+}
+
+
+/*BOARD*/
+
 .round-wrapper {
 }
 
@@ -52,6 +78,7 @@ body {
 .word {
   font-weight: bold;
 }
+
 
 .board-wrapper {
   padding-top: 20px;
@@ -77,7 +104,6 @@ body {
   border-width: 0px;
 }
 
-
 .image-red {
   border-color: #D62839;
 }
@@ -91,36 +117,18 @@ body {
   border-style: solid;
 }
 
-
-.team-red {
-  text-align: center;
-  color: #D62839;
-}
-
-.team-blue {
-  text-align: center;
-  color: #0D4C80;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: white;
-}
-
 .word-input {
-  width: 70%;
+  width: 75%;
   display: inline-block;
   /*line-height: 30px;  */
-  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .submit {
   display: inline-block;
   float: right;
   background-color: black;
-  padding-bottom: 10px;
+  margin-bottom: 20px;
   color: white;
 }
 
@@ -139,14 +147,62 @@ body {
   background-color: black;
 }
 
-
-/*.bar-red {
-  background-color: #D62839;
+.bar-red {
+  background-color: #D62839 !important;
 }
 
 .bar-blue {
-  background-color: #0D4C80;
+  background-color: #0D4C80 !important;
 }
-*/
+
+
+/*HOME PAGE!*/
+
+.lobby-wrapper {
+  padding-top: 100px;
+}
+
+.lobby-input {
+  width: 75%;
+  display: inline-block;
+  /*line-height: 30px;  */
+  margin-bottom: 20px;
+}
+
+.lobby-submit {
+  display: inline-block;
+  float: right;
+  background-color: black;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/*GAME OVER PAGE*/
+
+.game-over-score {
+  font-size: 48px;
+}
+
+.play-again-wrapper {
+  padding-top: 100px;
+  align-self: center;
+}
+
+.play-again-submit {
+  background-color: black;
+  color: white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+
+
+
+
+
+
+
 
 
