@@ -86,10 +86,9 @@ class Game {
         } else if (data.attributes.state == "BOARD-WORD") {
           this.toState("BOARD-WORD");
         } else if (data.attributes.state == "BOARD-SELECT") {
-          // game word must be sent in 'data'
+          // game word and quantity must be sent in 'data'
           this.current_round_word = data.attributes.word;
-          // TODO: remove magic no
-          this.max_player_selections = 3;
+          this.max_player_selections = parseInt(data.attributes.quantity);
 
         }
         break;
@@ -112,13 +111,8 @@ class Game {
         break;
       case "BOARD-WORD":
         this.board.retrieveImages();
-        showBoardWord();
-        if (this.player_role == "CAPTAIN") {
-          // TODO: allow captain to select a word
-          // TODO: set timer
-        } else {
-          // TODO: player must wait while captain selects a word
-        }
+        showBoardWord(this.player_role);
+        // TODO: set timer
 
         break;
       case "BOARD-SELECT":
@@ -259,9 +253,10 @@ function showLoading() {
   $('.loading').show();
 }
 
-function showBoardWord() {
+function showBoardWord(player_role) {
   $('.start-hidden').hide();
   $('.board-word').show();
+  $('.board-word-' + player_role).show();
 }
 
 function showBoardSelect() {
@@ -289,8 +284,14 @@ $(document).ready(function() {
   __game = new Game('2398732', '23342', 'PLAYER');
 
   $('.lobby-submit').click(function() {showBoardSelect()});
-  $('#word-input-submit-btn').click(function() {
-    postToAPI({word: $('#word-input').val()})
+  $('#submit-word-1').click(function() {
+    postToAPI({word: $('#word-input').val(), quantity: 1})
+  });
+  $('#submit-word-2').click(function() {
+    postToAPI({word: $('#word-input').val(), quantity: 2})
+  });
+  $('#submit-word-3').click(function() {
+    postToAPI({word: $('#word-input').val(), quantity: 3})
   });
 
   setInterval(getStatus, update_interval, __game);
