@@ -180,15 +180,16 @@ class Image {
     this.owner = owner;
     this.parentArray = parentArray;
     this.wrapperObject = $('#image-wrapper-' + index);
+    this.imageObject = $('#image-' + index);
     // remove any existing classes associated with image and add class
     //    representing team owning image
-    this.wrapperObject.removeClass().addClass("image-" + owner);
+    this.imageObject.removeClass().addClass("image-" + owner);
 
     // if (this.game.player_role == "PLAYER") {
     // TODO: only players can select
     this.wrapperObject.on("click", function() {
       if (self.parentArray.countSelected() < 3) {
-        self.wrapperObject.addClass('show-border');
+        self.imageObject.addClass('show-border');
         self.selected = true;
       }
     });
