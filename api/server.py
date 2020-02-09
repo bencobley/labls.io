@@ -34,7 +34,13 @@ def index():
                     "data": {
                         "type": "status",
                         "attributes": {
-                            "playerTeam": playerTeam,
+                            "state": game.getStatus(),
+                            "teams":
+                                [
+                                    { "redScore" : game.returnRedScore()},
+                                    { "blueScore" : game.returnBlueScore()}
+
+                                ]
 
                         }
                     }
@@ -43,6 +49,17 @@ def index():
             return json.dumps(response)
 
         elif request_type == "images":
+            response = {
+                "data": {
+                    "type" : "images",
+                        "attributes" : {
+                            "state" : game.getState(),
+                            "images" : game.returnImageMap()
+
+                        }
+                    }
+                }
+            return json.dumps(response)
 
 
 
@@ -55,6 +72,6 @@ def index():
 
 
 
-game = gameEngine()
+game = GameEngine()
 
 app.run()
