@@ -202,7 +202,26 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 40%;
+  margin-top: 20px;
+  width: 60%;
+}
+
+
+/*ROUND OVER PAGE*/
+
+.continue-round-wrapper {
+  padding-top: 100px;
+  align-self: center;
+}
+
+.continue-round-submit {
+  background-color: black;
+  color: white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 60%;
 }
 
 /*LOADING PAGE*/
