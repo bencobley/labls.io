@@ -172,12 +172,13 @@ class Board {
 
 
 class Image {
-  constructor(id, index, url, owner, parent) {
+  constructor(id, index, url, owner, parentArray) {
+    var self = this;
     this.id = id;
     this.index = index;
     this.selected = false;
     this.owner = owner;
-    this.parent = parent;
+    this.parentArray = parentArray;
     this.wrapperObject = $('#image-wrapper-' + index);
     // remove any existing classes associated with image and add class
     //    representing team owning image
@@ -185,20 +186,20 @@ class Image {
 
     // if (this.game.player_role == "PLAYER") {
     // TODO: only players can select
-    this.setClickable();
+    this.wrapperObject.on("click", function() {
+      if (self.parentArray.countSelected() < 3) {
+        self.wrapperObject.addClass('show-border');
+        self.selected = true;
+      }
+    });
     // }
   }
 
-  select() {
-    // TODO: remove magic number
-    if (this.parent.countSelected() < 3) {
-      this.wrapperObject.addClass('show-border');
-      this.selected = true;
-    }
-  }
+
 
   setClickable() {
-    this.wrapperObject.on("click", this.select);
+
+
   }
 
 
