@@ -64,7 +64,7 @@ Request for images
                                   "images" : [
                                                 { "id" : 239234
                                                   "url" : "URL.COM"
-                                                  "imageType" : 0 },  // where value is ID of team that owns image, or "black"
+                                                  "owner" : "red" },  // where value is colour of team that owns image, or "black"
 
                                                 ... repeat x 7 ...
 

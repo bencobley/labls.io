@@ -8,7 +8,7 @@ CORS(app)
 @app.route('/api', methods=['GET','POST'])
 def index():
 
-    return request.args.get("user")
+    return "hello" + request.args.get('user')
 
 
 if __name__ == '__main__':
