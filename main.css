@@ -7,92 +7,49 @@ html {
 
 
 h1 {
+    font-family: monospace;
     text-align: center;
-    font-size: 32px;
-    padding-top: 40px;
-   font-weight: bold;
+    font-size: 30px;
+    padding-top: 20px;
 }
 
 h2 {
+    font-family: monospace;
     text-align: center;
-    font-size: 15px;
+    font-size: 10px;
 }
 
 
 body {
   font-size: 14px;
-  font-family: monospace;
+  /*padding: 5px;*/
   min-height: 100vh;
   overflow-x: hidden;
   width: 100%;
 }
 
-.board-wrapper {
-  padding: 0px;
+.image {
+    width: 100%;
 }
 
-
-.image-wrapper {
-  width: 50%;
-  display: inline-block;
-  padding: 1px;
+.image_div {
+    background-color: black;
 }
 
-
-.game-image {
-  width: 100%;
-
-}
-
-.show-border {
-  border-style: solid;
-  border-width: 6px 8px;
-}
-
-.hide-border {
-  border-style: none;
-  border-width: 0px;
-}
-
-
-.red-team-image {
-  border-color: #D62839;
-}
-
-.blue-team-image {
-  border-color: #0D4C80;
-}
-
-.killer-image {
-  border-color: black;
-  border-style: solid;
-}
-
-
-.team-red {
-  text-align: center;
-  color: #D62839;
-}
 
 .footer {
+  padding: 10px;
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 30px;
-  background: white;
   /*height: 60px;  */
+  line-height: 30px;  
+  background-color: gray;
 }
 
 .word-input {
-  width: 70%;
-  display: inline-block;
-  /*line-height: 30px;  */
-}
-
-.submit {
-  display: inline-block;
-  float: right;
-  background-color: black;
+  width: 100%;
+  padding-left: 0px;
 }
 
 
