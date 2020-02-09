@@ -23,13 +23,17 @@ class imageManager (object):
             category_path = path + "/" + category
 
             for (dirpath, dirnames, filenames) in walk(category_path):
-            
+                
+                mypath = dirpath + "/"
 
-                this_category.extend(filenames)
+                filepaths = [mypath + s for s in filenames]
+
+                this_category.extend(filepaths)
 
 
             for file in this_category:
-                if not file.endswith(".jpg"):
+
+                if file.endswith(".DS_Store"):
                     this_category.remove(file)
 
             array.append(this_category)
