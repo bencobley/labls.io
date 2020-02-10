@@ -24,7 +24,7 @@
             </div>
 
             <div class="round-over-wrapper start-hidden result-round">
-                <h2>End of round X.</h2>
+                <h2>End of round 2.</h2>
             </div>
 
             <div class="team-wrapper start-hidden board-word board-select loading">
@@ -32,7 +32,7 @@
             </div>
 
             <div class="score-wrapper start-hidden board-word board-select loading result-game result-round">
-                <h2 id="score"><span id=red-score class="red-score">3</span> - <span id="blue-score" class="blue-score">5</span></h2>
+                <h2 id="score"><span id=red-score class="red-score">0</span> - <span id="blue-score" class="blue-score">0</span></h2>
             </div>
 
             <hr>
@@ -42,12 +42,17 @@
 
             <div class="lobby-wrapper start-hidden intro">
                 <h2>Join lobby</h2>
-                <input class="lobby-input form-control" type="text" id="server-input" placeholder=Keyword>
+                <input class="lobby-input form-control" type="text" id="server-input" placeholder="keyword">
                 <button type="submit" class="lobby-submit btn">Submit</button>
             </div>
 
             <div class="round-wrapper start-hidden board-select" >
-                <h2>The chosen word was <span id="word" class="word">domesticated</span>. Guess <span id=number-images class="number-images"> 3 images</span>: </h2>
+                <h2>The chosen word was 
+                    <span id="word" class="word">_________</span>. 
+                    <span id="guess-message" class="board-select-PLAYER"> Guess 
+                        <span id=number-images class="number-images"> _ images </span>: 
+                     </span>
+                 </h2>
             </div>
             <div class="board-wrapper start-hidden board-word board-select">
                 <div id="image-wrapper-0" class="image-wrapper">
@@ -84,7 +89,7 @@
             </div>
 
             <div class="play-again-wrapper start-hidden result-game">
-                <h2>XXX team won! &#x1F389; &#x1F389; &#x1F389;</h2>
+                <h2>Blue team won! &#x1F389; &#x1F389; &#x1F389;</h2>
                 <h2>Thanks for labl.ing!</h2>
                 <button type="submit" class="play-again-submit btn">Play again</button>
             </div>
@@ -92,7 +97,7 @@
 
             <div class="continue-round-wrapper start-hidden result-round">
                 <h2>This round:</h2>
-                <h2 id="score"><span id=red-round-score class="red-round-score">+X</span>   <span id="blue-round-score" class="blue-round-score">+X</span></h2>
+                <h2 id="score"><span id=red-round-score class="red-round-score">+0</span>   <span id="blue-round-score" class="blue-round-score">+2</span></h2>
                 <button type="submit" class="continue-round-submit btn">Continue</button>
             </div>
 
@@ -136,7 +141,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="frontend/js/app.js"></script>
-        <script src="nav.js"></script>
+        <!-- <script src="nav.js"></script> -->
         <script src="timer_bar.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

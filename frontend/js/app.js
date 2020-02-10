@@ -21,8 +21,6 @@ function formGetUrl(endpoint, data) {
 
 
 
-
-
 function log(data) {
   console.log(data);
 }
@@ -120,13 +118,20 @@ class Game {
 
         break;
       case "BOARD-SELECT":
+
+        $('span#word').html(this.current_round_word);
+        $('span#number-images').text(this.max_player_selections 
+          + (this.max_player_selections == "1" ? " image" : " images")).show();
+
         showBoardSelect();
         if (this.player_role == "PLAYER") {
           // TODO: allow player to select images
           // TODO: set maximum number of images to select
-          this.current_round_max_no_images = 3;
+          
+
           // TODO: set timer
         } else {
+          $('#guess-message').hide();
           // TODO: captain must wait while player selects images
         }
         break;
@@ -297,17 +302,17 @@ $(document).ready(function() {
   var team = new URLSearchParams(window.location.search).get('team');
   var role = new URLSearchParams(window.location.search).get('role');
 
-  // BEN DO IT HERE
+  var roleNoun = (role == "CAPTAIN" ? "Captain" : "Labelr")
 
   if (team == "red") {
     $('.team-text').css("color", "#D62839");
-    $('.team-text').html("Red team");
+    $('.team-text').html("You are the red team " + roleNoun);
     $('#progress-bar').css("background-color", "#D62839");
   }
 
   if (team == "blue") {
     $('.team-text').css("color", "#0D4C80");
-    $('.team-text').html("Blue team");
+    $('.team-text').html("You are the blue team " + roleNoun);
     $('#progress-bar').css("background-color", "#0D4C80");
   }
 
@@ -317,15 +322,24 @@ $(document).ready(function() {
     __game.toState("BOARD-WORD");
   });
   $('#submit-word-1').click(function() {
+    showLoading();
     postToAPI({team: __game.team_id, type: "word", word: $('#word-input').val(), quantity: 1})
   });
   $('#submit-word-2').click(function() {
+    showLoading();
     postToAPI({team: __game.team_id, type: "word", word: $('#word-input').val(), quantity: 2})
   });
   $('#submit-word-3').click(function() {
+    showLoading();
     postToAPI({team: __game.team_id, type: "word", word: $('#word-input').val(), quantity: 3})
   });
 
   setInterval(getStatus, update_interval, __game);
 
 });
+
+
+function showLoading() {
+  $('.start-hidden').hide();
+  $('.loading').show();
+}

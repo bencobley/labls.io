@@ -40,9 +40,9 @@ class GameEngine:
         self.blueChosen = False
         photos = self.generateImages()
         self.currentPhotos = photos
-        self.redPhotos = photos[:4]
-        self.bluePhotos = photos[4:7]
-        self.blackPhoto = photos[-1]
+        self.redPhotos = [photos[0], photos[3], photos[4], photos[7]]
+        self.bluePhotos = [photos[1], photos[5], photos[6]]
+        self.blackPhoto = photos[2]
         self.currentState = "BOARD-WORD"
 
     def calculateScores(self):
@@ -75,7 +75,7 @@ class GameEngine:
     def generateImages(self):
         # method should randomly select 8 images from database
 
-        return ['img/Animals/snake1.jpg', 'img/Animals/fish2.jpg', 'img/Animals/cat2.jpg', 'img/Animals/dog2.jpg', 'img/Animals/giraffe1.jpg', 'img/Animals/dog1.jpg', 'img/Animals/fish1.jpg', 'img/Animals/nemo1.jpg']
+        return ['http://localhost:8888/img/Animals/snake1.jpg', 'http://localhost:8888/img/Animals/fish2.jpg', 'http://localhost:8888/img/Animals/cat2.jpg', 'http://localhost:8888/img/Animals/dog2.jpg', 'http://localhost:8888/img/Animals/giraffe1.jpg', 'http://localhost:8888/img/Animals/dog1.jpg', 'http://localhost:8888/img/Animals/fish1.jpg', 'http://localhost:8888/img/Animals/nemo1.jpg']
         # return ["http://localhost/img/pet/cat/cat3.jpeg",
         #         "http://localhost/img/pet/cat/cat3.jpeg",
         #         "http://localhost/img/pet/cat/cat3.jpeg",
@@ -119,16 +119,16 @@ class GameEngine:
 
         imageMap = [{
             "url" : self.currentPhotos[0],
-            "owner" : "red"
+            "owner" : "blue"
         },
             {
                 "url" : self.currentPhotos[1],
-                "owner" : "red"
+                "owner" : "black"
             },
 
             {
                 "url" : self.currentPhotos[2],
-                "owner" : "red"
+                "owner" : "blue"
             },
             {
                 "url" : self.currentPhotos[3],
@@ -144,11 +144,11 @@ class GameEngine:
             },
             {
                 "url" : self.currentPhotos[6],
-                "owner" : "blue"
+                "owner" : "red"
             },
             {
                 "url" : self.currentPhotos[7],
-                "owner" : "black"
+                "owner" : "red"
             },
 
         ]

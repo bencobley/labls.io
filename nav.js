@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-  showIntro();
+  showResultRound();
 });
 
 
@@ -39,6 +39,6 @@ function showResultGame () {
 }
 
 
-$('.lobby-submit').click(function() {showBoardSelect()});
+$('.lobby-submit').click(function() {showBoardWord()});
 
 
